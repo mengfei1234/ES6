@@ -1,0 +1,47 @@
+ES6 允许按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构
+1.数组解构赋值的例子：
+let [foo, [[bar], baz]] = [1, [[2], 3]];
+foo // 1
+bar // 2
+baz // 3
+
+let [ , , third] = ["foo", "bar", "baz"];
+third // "baz"
+
+let [x, , y] = [1, 2, 3];
+x // 1
+y // 3
+
+let [head, ...tail] = [1, 2, 3, 4];
+head // 1
+tail // [2, 3, 4]
+
+let [x, y, ...z] = ['a'];
+x // "a"
+y // undefined
+z // []
+
+另一种情况是不完全解构，即等号左边的模式，只匹配一部分的等号右边的数组。这种情况下，解构依然可以成功。
+let [x, y] = [1, 2, 3];
+x // 1
+y // 2
+
+let [a, [b], d] = [1, [2, 3], 4];
+a // 1
+b // 2
+d // 4
+主例：
+function* fibs() {
+  let a = 0;
+  let b = 1;
+  while (true) {
+    yield a;
+    [a, b] = [b, a + b];
+  }
+}
+
+let [first, second, third, fourth, fifth, sixth] = fibs();
+sixth // 5
+
+2。解构赋值允许指定默认值
+如果一个数组成员是null，默认值就不会生效，因为null不严格等于undefined。
